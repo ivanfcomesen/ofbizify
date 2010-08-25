@@ -1,0 +1,3 @@
+For getting started with ofbizify, you will need,
+
+1) GWT (SDK + Eclipse Plugin) - [http://code.google.com/webtoolkit/]
