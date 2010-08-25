@@ -142,9 +142,8 @@ public class Ofbizifyexample implements EntryPoint {
 		
 		customerTable.addClickHandler(
     			new ClickHandler() {
-					
-					@Override
-					public void onClick(ClickEvent event) {
+
+    				public void onClick(ClickEvent event) {
 
 						FlexTable ft = (FlexTable) event.getSource();
 						Cell c = ft.getCellForEvent(event);
@@ -203,7 +202,6 @@ public class Ofbizifyexample implements EntryPoint {
 
 		ChangeHandler countryChangeHandler = new ChangeHandler() {
 
-			@Override
 			public void onChange(ChangeEvent event) {
 				getStates();
 			}
@@ -237,8 +235,7 @@ public class Ofbizifyexample implements EntryPoint {
 		saveButton.setStyleName("saveChangesButtonStyle");
 		
 		saveButton.addClickHandler(new ClickHandler() {
-			
-			@Override
+
 			public void onClick(ClickEvent event) {
 
 				//you can do the validation over here
