@@ -1,3 +1,34 @@
-For getting started with ofbizify, you will need,
+*For getting started with ofbizify, you will need,*
 
-1) GWT (SDK + Eclipse Plugin) - [http://code.google.com/webtoolkit/]
+1) GWT (SDK + Eclipse Plugin) - [http://code.google.com/webtoolkit/], you can set the Web Toolkit in Eclipse by going to Window -> Preferences -> Google -> Web Toolkit
+
+Steps :
+
+1) Check out ofbizify to hot-deploy from 
+   https://ofbizify.googlecode.com/svn/trunk/ofbizify/trunk
+
+2) Check out ofbizify client (outside ofbiz, just need it for create ofbizify-client.jar, which will be needed when you create your own custom ofbiz component)  from
+   https://ofbizify.googlecode.com/svn/trunk/ofbizify-client/trunk
+
+3) Check out ofbizify_example.zip, this zip contains custom ofbiz component, which you can unzip to hot-deploy, which uses ofbizify to communicate with ofbiz.
+
+
+4) Add gwt-user.jar, you can find it in gwt folder, and ofbizify-client.jar, you need to create this jar file from ofbizify-client project
+
+5) As currently the sample application only works with the "DemoCustomer" party, you need to add the DemoCustomer party to "FullAdmin" security group, and also need to add "Primary Phone Number" as Contact purpose to already existing phone number and add a new number as "Main mobile phone number"
+
+6) Point your browser to http://localhost:8080/ofbizifyexample/Ofbizifyexample.html
+
+Currently the sample application is not much impressive, and works only for "DemoCustomer" record and has only the read & update functionality, but the basic purpose was to show the integration, and also I have tried to make it work with the existing data, that's why the additional step 6 is required, but soon I will create a sample application with all the CRUD operations and having its own entities and demo data.
+
+There are 3 Event Handlers in ofbizify:
+
+1) GwtRpcGroovyEventHandler (gwtgroovy) - To call groovy scripts
+2) GwtRpcJavaEventHandler (gwtjava)   - To call java events
+3) GwtRpcServiceEventHandler (gwtservice) - To call services
+
+To use this handlers you will need to include the ofbizify controller to your application controller
+
+How to make requests :
+
+1) 
