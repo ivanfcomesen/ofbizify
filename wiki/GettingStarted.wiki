@@ -10,10 +10,17 @@ Steps :<br/>
 2) Check out ofbizify client (outside ofbiz, just need it for create ofbizify-client.jar, which will be needed when you create your own custom ofbiz component)  from
    https://ofbizify.googlecode.com/svn/trunk/ofbizify-client/trunk
 <br/>
-3) Check out ofbizify_example.zip, this zip contains custom ofbiz component, which you can unzip to hot-deploy, which uses ofbizify to communicate with ofbiz.<br/>
-4) Add gwt-user.jar, you can find it in gwt folder, and ofbizify-client.jar, you need to create this jar file from ofbizify-client project<br/>
-5) As currently the sample application only works with the "DemoCustomer" party, you need to add the DemoCustomer party to "FullAdmin" security group, and also need to add "Primary Phone Number" as Contact purpose to already existing phone number and add a new number as "Main mobile phone number"<br/>
-6) Point your browser to http://localhost:8080/ofbizifyexample/Ofbizifyexample.html<br/><br/>
+3) Check out ofbizify_example.zip, this zip contains custom ofbiz component, which you can unzip to hot-deploy, which uses ofbizify to communicate with ofbiz.
+<br/>
+
+4) Add gwt-user.jar, you can find it in gwt folder, and ofbizify-client.jar, you need to create this jar file from ofbizify-client project
+<br/>
+
+5) As currently the sample application only works with the "DemoCustomer" party, you need to add the DemoCustomer party to "FullAdmin" security group, and also need to add "Primary Phone Number" as Contact purpose to already existing phone number and add a new number as "Main mobile phone number"
+<br/>
+
+6) Point your browser to http://localhost:8080/ofbizifyexample/Ofbizifyexample.html
+<br/><br/>
 Currently the sample application is not much impressive, and works only for "DemoCustomer" record and has only the read & update functionality, but the basic purpose was to show the integration, and also I have tried to make it work with the existing data, that's why the additional step 6 is required, but soon I will create a sample application with all the CRUD operations and having its own entities and demo data.<br/><br/>
 There are 3 Event Handlers in ofbizify:<br/>
 1) GwtRpcGroovyEventHandler (gwtgroovy) - To call groovy scripts<br/>
@@ -22,23 +29,21 @@ There are 3 Event Handlers in ofbizify:<br/>
 <br/>
 To use this handlers you will need to include the ofbizify controller to your application controller
 <br/>
-How to make requests :
+*How to make requests :*
 <br/>
 Configuration :
 <br/>
 1) Add the below servlet mapping to web.xml
 
-	<servlet>
-		<servlet-name>gwtrpc</servlet-name>
-		<servlet-class>com.legeriti.ofbizify.gwt.gwtrpc.rpc.server.GwtRpcServiceImpl</servlet-class>
-	</servlet>
+<servlet>
+<servlet-name>gwtrpc</servlet-name>
+<servlet-class>com.legeriti.ofbizify.gwt.gwtrpc.rpc.server.GwtRpcServiceImpl</servlet-class>
+</servlet>
 
-	<servlet-mapping>
-		<servlet-name>gwtrpc</servlet-name>
-		<url-pattern>/gwtrpc</url-pattern>
-	</servlet-mapping>
-
-
+<servlet-mapping>
+<servlet-name>gwtrpc</servlet-name>
+<url-pattern>/gwtrpc</url-pattern>
+</servlet-mapping>
 
 After configuring you will be able to make request from GWT front-end
 
@@ -49,43 +54,39 @@ Steps :
 For e.g.
 
 <request-map uri="countries">
-        <event type="gwtgroovy" path="component://<your compponent>/webapp/<your webapp>/WEB-INF/actions/" invoke="Countries.groovy"/>
-        <response name="success" type="none"/>
-        <response name="error" type="none"/>
-    </request-map>
+<event type="gwtgroovy" path="component://<your compponent>/webapp/<your webapp>/WEB-INF/actions/" invoke="Countries.groovy"/>
+<response name="success" type="none"/>
+<response name="error" type="none"/>
+</request-map>
 
 The above example is using groovy script, you can use java event or services as well.
 
 2) From the GWT front end, to invoke the above request, you need to code as below.
 
+{{{
 //parameters that needs to be sent to the server
-
 HashMap<String, String> parameters = new HashMap<String, String>();
 parameters.put("fields", "geoId,geoName");
 
-Note : fields parameter is used when you need only the specific columns to be fetched instead of all the columns, here we will get only the "geoId" & "geoName" columns, as we need only these two, not passing this parameter will result to all the collumns being fetched
+Note : fields parameter is used when you need only the specific columns to be fetched instead of all the columns, here we will get only the "geoId" & "geoName" columns, as we need only these two, not passing this parameter will result to all the collumns being fetched.
 
 AsyncCallback<HashMap<String, Object>> callback = new AsyncCallback<HashMap<String, Object>>() {
-			
-			public void onFailure(Throwable caught) {
-				Window.alert("SERVER_ERROR " + caught.toString());
-			}
-			
-			public void onSuccess(HashMap<String, Object> result) {
 
-//ServiceUtil is the class in ofbizify-client.jar, to check service results
-				if(ServiceUtil.isSuccess(result)) {
-					
-					if(result.get("result") instanceof List) {
+     public void onFailure(Throwable caught) {
+          Window.alert("SERVER_ERROR " + caught.toString());
+     }
 
-						List<HashMap<String, String>> countries = (List<HashMap<String, String>>)result.get("result");
+     public void onSuccess(HashMap<String, Object> result) {
 
+          //ServiceUtil is the class in ofbizify-client.jar, to check service results
+          if(ServiceUtil.isSuccess(result)) {
+               if(result.get("result") instanceof List) {
+                    List<HashMap<String, String>> countries = (List<HashMap<String,String>>)result.get("result");
 //do something with the countries, populate the drop down
-					}
-				}
-			}
-		};
-
+               }
+          }
+     }
+};
 
 String GET_COUNTRIES = "/<your webapp>/control/countries";
 
@@ -94,5 +95,6 @@ ServiceDefTarget endpoint = (ServiceDefTarget) gwtrcpService;
 
 endpoint.setServiceEntryPoint(GET_COUNTRIES);
 gwtrcpService.processRequest(parameters, callback);
+}}}
 
 In the same way you can use any gwtrpc handlers.
