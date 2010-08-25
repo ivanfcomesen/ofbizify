@@ -358,10 +358,10 @@ public class Ofbizifyexample implements EntryPoint {
 					"because of time constraint I could only provide the read & update functionality,<br/>" +
 					"but will be providing the create & delete functionality soon." +
 					"<br/>" +
-					"It would have been more simple if I had created a custom table and do CRUD operations on it,<br/>" +
-					"but to show that already existing services can be called but providing a simple wrapper around them, as choose this way." +
+					"It would have been more simple if I had created a custom table and did CRUD operations on it,<br/>" +
+					"but to show that already existing services can be called by simply providing a simple wrapper around them, I choose this way." +
 					"<br/>" +
-					"I have use groovy for calling use but you can choose groovy, java events or even services</h3>");
+					"I have used groovy scripts as services but you can choose groovy, java events or even services</h3>");
 		hp.add(msg);
 		//
 		
