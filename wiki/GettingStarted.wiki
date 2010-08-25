@@ -23,9 +23,9 @@ Steps :<br/>
 <br/><br/>
 Currently the sample application is not much impressive, and works only for "DemoCustomer" record and has only the read & update functionality, but the basic purpose was to show the integration, and also I have tried to make it work with the existing data, that's why the additional step 6 is required, but soon I will create a sample application with all the CRUD operations and having its own entities and demo data.<br/><br/>
 There are 3 Event Handlers in ofbizify:<br/>
-1) GwtRpcGroovyEventHandler (gwtgroovy) - To call groovy scripts<br/>
-2) GwtRpcJavaEventHandler (gwtjava)   - To call java events<br/>
-3) GwtRpcServiceEventHandler (gwtservice) - To call services<br/>
+1) {{{GwtRpcGroovyEventHandler (gwtgroovy) - To call groovy scripts}}}<br/>
+2) {{{GwtRpcJavaEventHandler (gwtjava)   - To call java events}}}<br/>
+3) {{{GwtRpcServiceEventHandler (gwtservice) - To call services}}}<br/>
 <br/>
 To use this handlers you will need to include the ofbizify controller to your application controller
 <br/>
