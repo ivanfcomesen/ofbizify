@@ -7,7 +7,7 @@ Steps :<br/>
 1) Check out ofbizify to hot-deploy from 
    https://ofbizify.googlecode.com/svn/trunk/ofbizify/trunk
 <br/>
-2) Check out ofbizify client (outside ofbiz, just need it for create ofbizify-client.jar, which will be needed when you create your own custom ofbiz component)  from
+2) Check out ofbizify client (outside ofbiz, just need it to create ofbizify-client.jar, which will be needed when you create your own custom ofbiz component),  from
    https://ofbizify.googlecode.com/svn/trunk/ofbizify-client/trunk
 <br/>
 3) Check out ofbizify_example.zip, this zip contains custom ofbiz component, which you can unzip to hot-deploy, which uses ofbizify to communicate with ofbiz.
