@@ -14,14 +14,17 @@ Steps :<br/>
    https://ofbizify.googlecode.com/svn/trunk/ofbizify_example.zip
 <br/>
 
-4) Add gwt-user.jar, you can find it in gwt folder, from the gwt zip file that you downloaded from the gwt site, and ofbizify-client.jar, you need to create this jar file from ofbizify-client project, but exporting it as jar from eclipse, also make sure to include the source files as well in the jar file.
+4) Add gwt-user.jar, you can find it in gwt folder, from the gwt zip file that you downloaded from the gwt site, and ofbizify-client.jar, you need to create this jar file from ofbizify-client project, by exporting it as jar from eclipse, also make sure to include the source files as well in the jar file, to the hot-deploy/ofbizify component's lib folder.
 <br/>
 
 5) As currently the sample application only works with the "DemoCustomer" party, you need to add the DemoCustomer party to "FullAdmin" security group, and also need to add "Primary Phone Number" as Contact purpose to already existing phone number and add a new number as "Main mobile phone number"
 <br/>
 
-6) Point your browser to http://localhost:8080/ofbizifyexample/Ofbizifyexample.html
+6) Build & start OFBiz, point your browser to http://localhost:8080/ofbizifyexample/Ofbizifyexample.html
 <br/><br/>
+
+The data you see in the table below is from OFBiz, you can click on the record to populate the form, and can make changes and clicking "Save Changes" will result in updating of record in ofbiz, you can verify if from the backend, also the table gets refreshed.
+
 Currently the sample application is not much impressive, and works only for "DemoCustomer" record and has only the read & update functionality, but the basic purpose was to show the integration, and also I have tried to make it work with the existing data, that's why the additional step 6 is required, but soon I will create a sample application with all the CRUD operations and having its own entities and demo data.<br/><br/>
 There are 3 Event Handlers in ofbizify:<br/>
 1) {{{GwtRpcGroovyEventHandler (gwtgroovy) - To call groovy scripts}}}<br/>
