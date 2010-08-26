@@ -10,7 +10,8 @@ Steps :<br/>
 2) Check out ofbizify client (outside ofbiz, just need it to create ofbizify-client.jar, which will be needed when you create your own custom ofbiz component),  from
    https://ofbizify.googlecode.com/svn/trunk/ofbizify-client/trunk
 <br/>
-3) Check out ofbizify_example.zip, this zip contains custom ofbiz component, which you need to unzip to hot-deploy to run the example.
+3) Check out ofbizify_example.zip, this zip contains custom ofbiz component, which you need to unzip to hot-deploy to run the example, from
+   https://ofbizify.googlecode.com/svn/trunk/ofbizify_example.zip
 <br/>
 
 4) Add gwt-user.jar, you can find it in gwt folder, and ofbizify-client.jar, you need to create this jar file from ofbizify-client project
