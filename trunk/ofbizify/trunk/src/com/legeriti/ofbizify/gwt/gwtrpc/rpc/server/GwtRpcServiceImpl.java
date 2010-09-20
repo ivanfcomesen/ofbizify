@@ -36,11 +36,6 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.ofbiz.base.util.Debug;
 import org.ofbiz.entity.GenericValue;
-import org.ofbiz.service.ModelService;
-import org.ofbiz.webapp.control.RequestHandler;
-import org.ofbiz.webapp.control.ConfigXMLReader.Event;
-import org.ofbiz.webapp.event.EventHandler;
-import org.ofbiz.webapp.event.EventHandlerException;
 
 import com.google.gwt.user.client.rpc.IncompatibleRemoteServiceException;
 import com.google.gwt.user.client.rpc.SerializationException;
@@ -348,7 +343,8 @@ public class GwtRpcServiceImpl extends AbstractRemoteServiceServlet implements
 
 	public HashMap<String, Object> processRequest(HashMap<String, String> parameters) {
 
-		HashMap<String, Object> returnMap = new HashMap<String, Object>();
+		//HashMap<String, Object> returnMap = new HashMap<String, Object>();
+		HashMap<String, Object> result = null;
 		
 		if(Debug.infoOn()) {
 			Debug.logInfo("In processRequest : parameters " + parameters, module);
@@ -357,17 +353,20 @@ public class GwtRpcServiceImpl extends AbstractRemoteServiceServlet implements
 		HttpServletRequest request = getThreadLocalRequest();
     	//HttpServletResponse response = getThreadLocalResponse();
 
-		Object obj = request.getAttribute("result");
+		Object ofbizPayLoad = request.getAttribute("ofbizPayLoad");
     	if(Debug.infoOn()) {
-			Debug.logInfo("result object : " + obj, module);
+			Debug.logInfo("ofbizPayLoad : " + ofbizPayLoad, module);
 		}
 
-    	Map<String, Object> result = (Map<String, Object>)obj;
+    	result = (HashMap<String, Object>)ofbizPayLoad;
     	if(Debug.infoOn()) {
-			Debug.logInfo("result : " + obj, module);
+			Debug.logInfo("result : " + result, module);
 		}
     	
-    	Object resultValue = result.get("data");
+    	//returnMap.put(ModelService.RESPONSE_MESSAGE, result.get(ModelService.RESPONSE_MESSAGE));
+    	
+    	//String responseMessage = 
+    	Object resultValue = result.get("payload");
     	if(Debug.infoOn()) {
 			Debug.logInfo("resultValue : " + resultValue, module);
 		}
@@ -379,7 +378,7 @@ public class GwtRpcServiceImpl extends AbstractRemoteServiceServlet implements
     			if(Debug.infoOn()) {
     				Debug.logInfo("resultValue is String", module);
     			}
-    			returnMap.put("result", resultValue);
+    			result.put("payload", resultValue);
 	    	}
 			else
     		if(resultValue instanceof Map<?, ?>) {
@@ -409,7 +408,7 @@ public class GwtRpcServiceImpl extends AbstractRemoteServiceServlet implements
     				servResult = convertToStringMap((GenericValue)resultValue, fields);
     			}
 
-    			returnMap.put("result", servResult);
+    			result.put("payload", servResult);
     		}
 	    	else
 	    	if(resultValue instanceof List<?>) {
@@ -425,24 +424,19 @@ public class GwtRpcServiceImpl extends AbstractRemoteServiceServlet implements
 
 	    		List<HashMap<String, String>> servResult = convertToStringMapList((List<GenericValue>)resultValue, fields);
 
-	    		returnMap.put("result", servResult);
+	    		result.put("payload", servResult);
 	        }
     		
     		if(Debug.infoOn()) {
-				Debug.logInfo("returnMap : " + returnMap, module);
+				Debug.logInfo("result : " + result, module);
 			}
 
     	}
 
-    	//result.put(ModelService.RESPONSE_MESSAGE, ModelService.RESPOND_SUCCESS);
-        //result.put(ModelService.RESPONSE_MESSAGE, ModelService.RESPOND_ERROR);
-        //result.put("data", eventResult);
-
-    	returnMap.put(ModelService.RESPONSE_MESSAGE, ModelService.RESPOND_SUCCESS);
-    	
     	//String mode = parameters.get("mode");
 
-    	return returnMap;
+    	//return returnMap;
+    	return result;
 	}
 
 }
