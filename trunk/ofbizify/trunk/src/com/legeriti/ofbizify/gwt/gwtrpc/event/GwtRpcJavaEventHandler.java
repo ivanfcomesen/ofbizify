@@ -30,13 +30,10 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import javolution.util.FastMap;
-
 import org.ofbiz.base.util.Debug;
-import org.ofbiz.service.ModelService;
-import org.ofbiz.webapp.control.RequestHandler;
 import org.ofbiz.webapp.control.ConfigXMLReader.Event;
 import org.ofbiz.webapp.control.ConfigXMLReader.RequestMap;
+import org.ofbiz.webapp.control.RequestHandler;
 import org.ofbiz.webapp.event.EventHandler;
 import org.ofbiz.webapp.event.EventHandlerException;
 
@@ -100,16 +97,13 @@ public class GwtRpcJavaEventHandler implements EventHandler {
 			} catch(EventHandlerException ehe) {
 				throw new EventHandlerException("Exception while executing java event : ",ehe);
 			}
-			
-			Map<String, Object> resultMap = FastMap.newInstance();
-	        resultMap.put(ModelService.RESPONSE_MESSAGE, ModelService.RESPOND_SUCCESS);
-	        //result.put(ModelService.RESPONSE_MESSAGE, ModelService.RESPOND_ERROR);
-	        resultMap.put("data",  eventResult);
+
+			Map<String, Object> resultMap = (Map<String, Object>) request.getAttribute("result");
 	        
 	        ServletContext sc = (ServletContext)request.getAttribute("servletContext");
         	RequestDispatcher rd = sc.getRequestDispatcher("/gwtrpc");
 
-        	request.setAttribute("result", resultMap);
+        	request.setAttribute("ofbizPayLoad", resultMap);
         	request.setAttribute("requestPayload", requestPayload);
         	
         	try {
