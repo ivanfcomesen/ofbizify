@@ -38,7 +38,6 @@ import org.ofbiz.base.util.GeneralException;
 import org.ofbiz.base.util.GroovyUtil;
 import org.ofbiz.base.util.UtilHttp;
 import org.ofbiz.base.util.UtilMisc;
-import org.ofbiz.service.ModelService;
 import org.ofbiz.webapp.control.ConfigXMLReader.Event;
 import org.ofbiz.webapp.control.ConfigXMLReader.RequestMap;
 import org.ofbiz.webapp.event.EventHandler;
@@ -116,22 +115,13 @@ public class GwtRpcGroovyEventHandler implements EventHandler {
            	} catch(GeneralException ge) {
            		throw new EventHandlerException("Exception while executing groovy script : ",ge); 
            	}
-           	
-           	//check the result
-            //if (result != null && !(result instanceof String)) {
-            //    throw new EventHandlerException("Event did not return a String result, it returned a " + result.getClass().getName());
-            //}
-            //return (String) result;
-           	
-           	Map<String, Object> resultMap = FastMap.newInstance();
-            resultMap.put(ModelService.RESPONSE_MESSAGE, ModelService.RESPOND_SUCCESS);
-            //result.put(ModelService.RESPONSE_MESSAGE, ModelService.RESPOND_ERROR);
-            resultMap.put("data",  result);
+
+           	Map<String, Object> resultMap = (Map<String, Object>) result;
 
             ServletContext sc = (ServletContext)request.getAttribute("servletContext");
             RequestDispatcher rd = sc.getRequestDispatcher("/gwtrpc");
 
-            request.setAttribute("result", resultMap);
+            request.setAttribute("ofbizPayLoad", resultMap);
             request.setAttribute("requestPayload", requestPayload);
             
             try {
